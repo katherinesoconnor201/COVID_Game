@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link rel="stylesheet" href="Bounce_Style.css" type="text/css">
+</head>
+
+<body>
+    <p id="intro"> Oh no, the COVID-19 virus is on the lose. They will make Pinky Lamb and Bear sick if they touch them. Use the arrow keys or the touchscreen in order to move Pinky Lamb to avoid COVID. Use the 'W', 'A', 'S', 'D' keys to move Bear if you have two players.
+        </p>
+    <button id="Single_Player" class="btn" onclick="Start_Game('Single_Player')"> Single Player </button>
+    <button id="Two_Player" class="btn" onclick="Start_Game('Two_Player')"> Two Player </button>
+    <button id="vs_Computer" class="btn" onclick="Start_Game('vs_Computer')"> vs Computer </button>
+    <image id="ghost" src="images/Pinky_Lamb4.png" style="display: none">
+        <canvas id="canvas" width="700" height="500"></canvas>
+        <script src="Bounce_Script.js"></script>
+</body>
+
+</html>
