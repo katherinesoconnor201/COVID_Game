@@ -139,7 +139,7 @@ function NewFood(x = 0, y = cvs.height / 2 - f.height, x_step = (1 + Math.random
         x: x,
         y: y,
         X_step: x_step,
-        Y_step: x_step,
+        Y_step: y_step,
         width: f.width,
         height: f.height,
         good: isGood
@@ -284,12 +284,10 @@ function collision(rect1, rect2, buffer) {
 }
 
 function CompMove(rect1, rect2) {
-    var b = box;
-
-    var isLeft = Math.abs(rect2.x + rect2.width - rect1.x) <= b;
-    var isRight = Math.abs(rect1.x + rect1.width - rect2.x) <= b;
-    var isAbove = Math.abs(rect2.y + rect2.height - rect1.y) <= b;
-    var isBelow = Math.abs(rect1.y + rect1.height - rect2.y) <= b;
+    var isLeft = Math.abs(rect2.x + rect2.width - rect1.x) < box;
+    var isRight = Math.abs(rect1.x + rect1.width - rect2.x) < box;
+    var isAbove = Math.abs(rect2.y + rect2.height - rect1.y) < box;
+    var isBelow = Math.abs(rect1.y + rect1.height - rect2.y) < box;
 
     /*if (isLeft) { player.x += step };
     if (isRight) { player.x -= step };
@@ -428,7 +426,7 @@ function draw() {
     ctx.fillStyle = "white";
     ctx.font = "bold 45px Courier"
     ctx.fillText("Score: " + (food.length + score), box, 0.6 * box);
-    //ctx.fillText("Lives: " + player[0].health, box * 7, 1.2 * box);
+    ctx.fillText("Lives: " + player[0].health, box * 7, 0.6 * box);
 };
 
 //window.requestAnimationFrame(draw);
