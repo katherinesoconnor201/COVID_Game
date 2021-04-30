@@ -112,8 +112,8 @@ function Start_Game(str) {
     food[0] = {
         x: 0,
         y: cvs.height / 2 - f.height,
-        X_step: 1.1 * step,
-        Y_step: 1.1 * step,
+        X_step: (1 + Math.random() / 2) * step,
+        Y_step: (-1 + Math.random() * 2) * step,
         good: false,
         width: f.width,
         height: f.height
@@ -133,7 +133,7 @@ function getRandomSpeed(fs = 1) {
     return Math.floor(Math.random() * fs * step + 2)
 }
 
-function NewFood(x = 0, y = cvs.height / 2 - f.height, x_step = getRandomSpeed(food_speed)) {
+function NewFood(x = 0, y = cvs.height / 2 - f.height, x_step = (1 + Math.random()) * step, y_step = (-1 + Math.random() * 2) * step) {
     var isGood = 1 == 2 //(Math.floor(Math.random() * 2) == 1);
     var newFood = {
         x: x,
@@ -360,11 +360,24 @@ function draw() {
         food[i].y += food[i].Y_step;
 
         //keeps food in bounds
-        if (food[i].x >= (cvs.width - food[i].width) || food[i].x <= 0) {
+        if (food[i].x > (cvs.width - food[i].width)) {
             food[i].X_step = -1 * food[i].X_step;
+            food[i].x = cvs.width - food[i].width + 1
         }
-        if (food[i].y >= (cvs.height - food[i].height) || food[i].y <= 100) {
+
+        if (food[i].x < 0) {
+            food[i].X_step = -1 * food[i].X_step;
+            food[i].x = 1
+        }
+
+        if (food[i].y > (cvs.height - food[i].height)) {
             food[i].Y_step = -1 * food[i].Y_step;
+            food[i].y = cvs.height - food[i].height - 1
+        }
+
+        if (food[i].y < 100) {
+            food[i].Y_step = -1 * food[i].Y_step;
+            food[i].y = 101
         }
 
 
@@ -383,8 +396,8 @@ function draw() {
                     score++;
                     console.log(food.length)
 
-                    NewFood(food[i].x - box, food[i].y + box, -0.9 * food[i].X_step)
-                    NewFood(food[i].x - box, food[i].y - box, -0.9 * food[i].X_step)
+                    NewFood(food[i].x - box, food[i].y + box, -0.8 * food[i].X_step, -0.8 * food[i].Y_step)
+                    NewFood(food[i].x - box, food[i].y - box, -0.8 * food[i].X_step, 0.8 * food[i].Y_step)
                     console.log(food.length)
                     food.splice(i, 1);
                     break;
